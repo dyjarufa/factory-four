@@ -1,36 +1,56 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { ApiStatus } from '../components/ApiStatus'
+import { api } from '../api/axios'
 
-const apiNames = ['accounts', 'assets', 'customers' /* outros nomes de API */]
-const INTERVAL = 15000
+const apiNames = [
+  'accounts',
+  'assets',
+  'customers',
+  'datapoints',
+  'devices',
+  'documents',
+  'forms',
+  'invites',
+  'media',
+  'messages',
+  'namespaces',
+  'orders',
+  'patients',
+  'relationships',
+  'rules',
+  'templates',
+  'users',
+  'workflows',
+]
+const INTERVAL = 5000
 
 export function StatusPage() {
   const [apiStatus, setApiStatus] = useState({})
 
-  const fetchStatus = async (apiName) => {
+  const fetchStatus = useCallback(async (apiName) => {
     try {
-      const response = await fetch(
-        `https://api.factoryfour.com/${apiName}/health/status`
-      )
+      const { data } = await api.get(`/${apiName}/health/status`)
 
-      const data = await response.json()
-
-      console.log('data', data)
-      setApiStatus((prev) => ({ ...prev, [apiName]: data }))
+      setApiStatus((prev) => ({
+        ...prev,
+        [apiName]: { ...data, error: false },
+      }))
     } catch (error) {
-      setApiStatus((prev) => ({ ...prev, [apiName]: { error: true } }))
+      const isUnavailable = error.response && error.response.status === 503
+      setApiStatus((prev) => ({
+        ...prev,
+        [apiName]: { error: true, isUnavailable: isUnavailable },
+      }))
     }
-  }
+  }, [])
 
   useEffect(() => {
-    apiNames.forEach((apiName) => fetchStatus(apiName))
-
     const interval = setInterval(() => {
       apiNames.forEach((apiName) => fetchStatus(apiName))
     }, INTERVAL)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [fetchStatus])
 
   return (
     <div>

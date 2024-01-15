@@ -3,11 +3,15 @@ export function ApiStatus({ name, status }) {
     return <div>Loading status of {name}</div>
   }
 
+  console.log('status', status)
+
   return (
     <div>
       <h2>{name}</h2>
       {status.error ? (
-        <p>Error fetching status</p>
+        <p style={{ color: status.isUnavailable ? 'red' : 'black' }}>
+          {status.isUnavailable || 'unavailable'}
+        </p>
       ) : (
         <>
           <p>Success: {status.success}</p>
