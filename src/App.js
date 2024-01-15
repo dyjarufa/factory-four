@@ -1,9 +1,7 @@
+import { StatusPage } from './pages/StatusPage'
+
 function App() {
-  return (
-    <div className="App">
-      <h1>hello world</h1>
-    </div>
-  )
+  return <StatusPage />
 }
 
 export default App
