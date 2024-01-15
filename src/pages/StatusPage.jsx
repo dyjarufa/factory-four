@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import { ApiStatus } from '../components/ApiStatus'
+
+import styles from './StatusPage.module.css'
+
 import { api } from '../api/axios'
 
 const apiNames = [
@@ -45,6 +48,8 @@ export function StatusPage() {
   }, [])
 
   useEffect(() => {
+    apiNames.forEach(fetchStatus)
+
     const interval = setInterval(() => {
       apiNames.forEach((apiName) => fetchStatus(apiName))
     }, INTERVAL)
@@ -53,7 +58,7 @@ export function StatusPage() {
   }, [fetchStatus])
 
   return (
-    <div>
+    <div className={styles.gridContainer}>
       {apiNames.map((apiName) => (
         <ApiStatus key={apiName} name={apiName} status={apiStatus[apiName]} />
       ))}

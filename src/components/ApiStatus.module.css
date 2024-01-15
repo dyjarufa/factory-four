@@ -1,0 +1,52 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  justify-content: center;
+}
+
+.statusCard {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Remova a largura se definida, para permitir que o grid controle o tamanho */
+}
+
+.statusCard {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px;
+  width: 200px; /* ou outra largura conforme necessário */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.statusCard h2 {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.statusCard p {
+  margin: 4px 0;
+  color: #333;
+}
+
+.statusHealthy {
+  background-color: #dff0d8;
+  color: #3c763d;
+}
+
+.statusError {
+  background-color: #f2dede;
+  color: #a94442;
+}
+
+.statusLoading {
+  background-color: #fcf8e3;
+  color: #8a6d3b;
+}
