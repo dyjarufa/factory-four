@@ -11,7 +11,6 @@
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Remova a largura se definida, para permitir que o grid controle o tamanho */
 }
 
 .statusCard {
@@ -19,7 +18,7 @@
   border-radius: 8px;
   padding: 16px;
   margin: 8px;
-  width: 200px; /* ou outra largura conforme necessário */
+  width: 200px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
